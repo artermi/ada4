@@ -8,7 +8,10 @@ int main(){
 	while(n--){
 		int a;
 		cin >> a;
-		cout << '0'<<' '<< a<< endl;
+		if(a > 1000)
+			cout << a - 1000 <<' ' << 1000 << endl;
+		else
+			cout << '0'<<' '<< a<< endl;
 	}
 	return 0;
 }
