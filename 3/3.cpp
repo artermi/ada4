@@ -15,7 +15,7 @@ int fight(const int i,const int j,const int c,const long long e,const long long 
 		power /= 2;
 	}
 
-	answer = ((c % p) * ( (i - j) % p) * answer) % p;
+	answer = (((long long)c % p) * ( (long long)(i - j) % p) * answer) % p;
 	if(answer < 0)
 		answer += p;
 	return answer  > (p / 2) ? 1 : 0;
