@@ -6,8 +6,8 @@
 using namespace std;
 
 int fight(const int i,const int j,const int c,const long long e,const int p){
-	int answer = 1;
-	int ground = i + j;
+	long long int answer = 1;
+	long long ground = i + j;
 	long long power = e;
 	while(power > 0){
 		if(power % 2 == 1){
@@ -19,10 +19,10 @@ int fight(const int i,const int j,const int c,const long long e,const int p){
 		power /= 2;
 	}
 
-	int ans = ((c % p) * ( (i - j) % p) * answer) % p;
+	long long int ans = ((c % p) * ( (i - j) % p) * answer) % p;
 	if(ans < 0)
 		ans += p;
-	return ans  > p / 2 ? 1 : 0;
+	return ans  > (p / 2) ? 1 : 0;
 }
 
 void sort_internal(int *array,const int start,const int end,const int c,const long long e,const int p);
@@ -42,16 +42,7 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 	int tmp[end - start + 1];
 	// total is 5 
 	if(fight(array[first_end],array[second_start],c,e,p) == win){
-		int j = 0;
-		for(int i = first_start; i <= first_end; i ++,j++)
-			tmp[j] = array[i];
-		//i end up with first_end + 1(3),j is 3
-		
-		for(int i = second_start; i <= second_end;i ++, j ++)
-			tmp[j] = array[i];
-		j --;
-		for(int i = end; i >= start; i --,j --)
-			array[i] = tmp[j];
+		return;
 	}
 	else if(fight(array[second_end],array[first_start],c,e,p) == win){
 		int j = 0;
@@ -90,8 +81,6 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 			}
 		}
 		j --;
-//		for(int i = 0; i < j; i ++)
-//			printf("ac%d ",tmp[i]);
 		for(int i = end; i >= start; i --,j --)
 			array[i] = tmp[j];
 	}
