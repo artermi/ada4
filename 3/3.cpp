@@ -2,33 +2,42 @@
 #define win 1
 #define lose 2
 
-int fight(const int i,const int j,const long long int c,const long long e,const long long int p){
+int fight(const int i,const int j,const int c,const long long e,const int p){
 	long long answer = 1;
 	long long ground = i + j;
 	long long power = e;
+	long long cp = c,pp = p,min = i - j;
 	while(power > 0){
 		if(power % 2 == 1){
 			answer *= ground;
-			answer %= p;
+			answer %= pp;
 		}
-		ground = (ground * ground) % p;
+		ground = (ground * ground) % pp;
 		power /= 2;
 	}
 
-	answer = ( (c % p) * (long long)((i - j) % p) * answer) % p;
+	answer = ( (cp % pp) * (min % pp) * answer) % pp;
 	if(answer < 0)
-		answer += p;
-	return answer  > (p / 2) ? 1 : 0;
+		answer += pp;
+	return answer  > (pp / 2) ? 1 : 0;
 }
 
-void sort_internal(int *array,const int start,const int end,const long long int c,const long long e,const long long int p);
-void sort(int *array, const int n,const long long int c,const long long e,const long long int p){
+void sort_internal(int *array,const int start,const int end,const int c,const long long e,const int p);
+void sort(int *array, const int n,const int c,const long long e,const int p){
 	// assume array is 1,2,3,4,5 0~4
 	sort_internal(array,0,n - 1,c,e,p);
 }
-void sort_internal(int *array,const int start,const int end,const long long int c,const long long e,const long long int p){
+void sort_internal(int *array,const int start,const int end,const int c,const long long e,const int p){
 	if(start == end)
 		return;
+	else if(start == end - 1){
+		if(fight(array[start],array[end],c,e,p) == win)
+			return;
+		else{
+			int tmp = array[start];array[start] = array[end];array[end] =tmp;
+			return;
+		}
+	}
 	int first_start = start,first_end = (start + end) / 2;
 	int second_start = first_end + 1, second_end = end;
 //	printf("%d %d %d %d\n",first_start,first_end,second_start,second_end);
@@ -87,9 +96,9 @@ int main (){
 	int time;
 	scanf("%d",&time);
 	while(time --){
-		int n;
-		long long c,e,p;
-		scanf("%d%lld%lld%lld",&n,&c,&e,&p);
+		int c,n,p;
+		long long e;
+		scanf("%d%d%lld%d",&n,&c,&e,&p);
 //		printf("%d %d %llu %llu\n",n,c,e,p);
 		int array[n];
 		for(int i = 0; i < n; i++)
