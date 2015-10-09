@@ -1,14 +1,12 @@
 #include <stdio.h>
-#define win 1
-#define lose 2
 
-int fight(const int i,const int j,const int c,const long long e,const int p){
+bool fight(const int i,const int j,const int c,const long long e,const int p){
 	long long answer = 1;
 	long long ground = i + j;
 	long long power = e;
 	long long cp = c,pp = p,min = i - j;
 	while(power > 0){
-		if(power % 2 == 1){
+		if(power & 1){
 			answer *= ground;
 			answer %= pp;
 		}
@@ -19,7 +17,7 @@ int fight(const int i,const int j,const int c,const long long e,const int p){
 	answer = ( (cp % pp) * (min % pp) * answer) % pp;
 	if(answer < 0)
 		answer += pp;
-	return answer  > (pp / 2) ? 1 : 0;
+	return answer  > (pp / 2);
 }
 
 void sort_internal(int *array,const int start,const int end,const int c,const long long e,const int p);
@@ -31,7 +29,7 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 	if(start == end)
 		return;
 	else if(start == end - 1){
-		if(fight(array[start],array[end],c,e,p) == win)
+		if(fight(array[start],array[end],c,e,p))
 			return;
 		else{
 			int tmp = array[start];array[start] = array[end];array[end] =tmp;
@@ -46,10 +44,10 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 	//4 5 3~4
 	int tmp[end - start + 1];
 	// total is 5 
-	if(fight(array[first_end],array[second_start],c,e,p) == win){
+	if(fight(array[first_end],array[second_start],c,e,p)){
 		return;
 	}
-	else if(fight(array[second_end],array[first_start],c,e,p) == win){
+	else if(fight(array[second_end],array[first_start],c,e,p)){
 		int j = 0;
 		for(int i = second_start; i <= second_end; i ++,j++)
 			tmp[j] = array[i];
@@ -78,7 +76,7 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 				}
 				break;
 			}
-			if(fight(array[first_i],array[second_i],c,e,p) == win){
+			if(fight(array[first_i],array[second_i],c,e,p)){
 				tmp[j] = array[first_i];first_i ++; j++;
 			}
 			else{
