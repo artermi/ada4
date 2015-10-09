@@ -88,6 +88,7 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 		for(int i = end; i >= start; i --,j --)
 			array[i] = tmp[j];
 	}
+	free(tmp);
 }
 
 
@@ -99,13 +100,14 @@ int main (){
 		long long e;
 		scanf("%d%d%lld%d",&n,&c,&e,&p);
 //		printf("%d %d %llu %llu\n",n,c,e,p);
-		int * array = (int *) malloc(n * sizeof(int));
+		int *array = (int *) malloc(n * sizeof(int));
 		for(int i = 0; i < n; i++)
 			array[i] = i + 1;
 		sort(array,n,c,e,p);
 		for(int i = 0; i < n; i ++)
 			printf("%d ",array[i]);
 		printf("\n");
+		free(array);
 	}
 	return 0;
 }
