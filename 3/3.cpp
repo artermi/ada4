@@ -6,14 +6,15 @@ bool fight(const int i,const int j,const int c,const long long e,const int p){
 	long long ground = i + j;
 	long long power = e;
 	long long cp = c,pp = p,min = i - j;
-	while(power > 0){
-		if(power & 1){
-			answer *= ground;
-			answer %= pp;
+	if(ground != pp)
+		while(power > 0){
+			if(power & 1){
+				answer *= ground;
+				answer %= pp;
+			}
+			ground = (ground * ground) % pp;
+			power >>= 1;
 		}
-		ground = (ground * ground) % pp;
-		power >>= 1;
-	}
 
 	answer = ( (cp % pp) * (min % pp) * answer) % pp;
 	if(answer < 0)
@@ -46,7 +47,7 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 	// total is 5 
 	if(fight(array[first_end],array[second_start],c,e,p))
 		return;	
-/*	else if(fight(array[second_end],array[first_start],c,e,p)){
+	else if(fight(array[second_end],array[first_start],c,e,p)){
 		int j = 0;
 		int *tmp = (int*) malloc( (end - start + 1) *sizeof(int));
 		for(int i = second_start; i <= second_end; i ++,j++)
@@ -57,7 +58,7 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 		for(int i = end; i >= start; i --,j --)
 			array[i] = tmp[j];
 		free(tmp);
-	}*/
+	}
 	else{
 		int *tmp = (int*) malloc( (end - start + 1) *sizeof(int));
 		int first_i = first_start;
@@ -79,7 +80,7 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 				break;
 			}
 			if(fight(array[first_i],array[second_i],c,e,p)){
-				tmp[j] = array[first_i];first_i ++; j++;
+				tmp[j] = array[first_i]; first_i ++; j++;
 			}
 			else{
 				tmp[j] = array[second_i]; second_i++; j ++;
