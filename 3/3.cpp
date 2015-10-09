@@ -29,14 +29,14 @@ void sort(int *array, const int n,const int c,const long long e,const int p){
 void sort_internal(int *array,const int start,const int end,const int c,const long long e,const int p){
 	if(start == end)
 		return;
-	else if(start == end - 1){
+/*	else if(start == end - 1){
 		if(fight(array[start],array[end],c,e,p))
 			return;
 		else{
 			int tmp = array[start];array[start] = array[end];array[end] =tmp;
 			return;
 		}
-	}
+	}*/
 	int first_start = start,first_end = (start + end) / 2;
 	int second_start = first_end + 1, second_end = end;
 //	printf("%d %d %d %d\n",first_start,first_end,second_start,second_end);
