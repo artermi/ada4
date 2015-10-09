@@ -2,7 +2,7 @@
 #define win 1
 #define lose 2
 
-int fight(const int i,const int j,const int c,const long long e,const long long int p){
+int fight(const int i,const int j,const long long int c,const long long e,const long long int p){
 	long long answer = 1;
 	long long ground = i + j;
 	long long power = e;
@@ -15,18 +15,18 @@ int fight(const int i,const int j,const int c,const long long e,const long long 
 		power /= 2;
 	}
 
-	answer = (((long long)c % p) * ( (long long)(i - j) % p) * answer) % p;
+	answer = ( (c % p) * (long long)((i - j) % p) * answer) % p;
 	if(answer < 0)
 		answer += p;
 	return answer  > (p / 2) ? 1 : 0;
 }
 
-void sort_internal(int *array,const int start,const int end,const int c,const long long e,const long long int p);
-void sort(int *array, const int n,const int c,const long long e,const long long int p){
+void sort_internal(int *array,const int start,const int end,const long long int c,const long long e,const long long int p);
+void sort(int *array, const int n,const long long int c,const long long e,const long long int p){
 	// assume array is 1,2,3,4,5 0~4
 	sort_internal(array,0,n - 1,c,e,p);
 }
-void sort_internal(int *array,const int start,const int end,const int c,const long long e,const long long int p){
+void sort_internal(int *array,const int start,const int end,const long long int c,const long long e,const long long int p){
 	if(start == end)
 		return;
 	int first_start = start,first_end = (start + end) / 2;
@@ -87,9 +87,9 @@ int main (){
 	int time;
 	scanf("%d",&time);
 	while(time --){
-		int n,c;
-		long long e,p;
-		scanf("%d%d%lld%lld",&n,&c,&e,&p);
+		int n;
+		long long c,e,p;
+		scanf("%d%lld%lld%lld",&n,&c,&e,&p);
 //		printf("%d %d %llu %llu\n",n,c,e,p);
 		int array[n];
 		for(int i = 0; i < n; i++)
