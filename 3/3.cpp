@@ -90,7 +90,7 @@ int main (){
 		int n,c;
 		long long e,p;
 		scanf("%d%d%lld%lld",&n,&c,&e,&p);
-		printf("%d %d %llu %llu\n",n,c,e,p);
+//		printf("%d %d %llu %llu\n",n,c,e,p);
 		int array[n];
 		for(int i = 0; i < n; i++)
 			array[i] = i + 1;
