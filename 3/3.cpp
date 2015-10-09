@@ -6,7 +6,7 @@ bool fight(const int i,const int j,const int c,const long long e,const int p){
 	long long ground = i + j;
 	long long power = e;
 	long long cp = c,pp = p,min = i - j;
-	if(ground != pp)
+//	if(ground != pp)
 		while(power > 0){
 			if(power & 1){
 				answer *= ground;
