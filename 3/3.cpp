@@ -29,14 +29,14 @@ void sort(int *array, const int n,const int c,const long long e,const int p){
 void sort_internal(int *array,const int start,const int end,const int c,const long long e,const int p){
 	if(start == end)
 		return;
-/*	else if(start == end - 1){
+	else if(start == end - 1){
 		if(fight(array[start],array[end],c,e,p))
 			return;
 		else{
 			int tmp = array[start];array[start] = array[end];array[end] =tmp;
 			return;
 		}
-	}*/
+	}
 	int first_start = start,first_end = (start + end) / 2;
 	int second_start = first_end + 1, second_end = end;
 //	printf("%d %d %d %d\n",first_start,first_end,second_start,second_end);
@@ -45,9 +45,9 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 	//4 5 3~4
 	int *tmp = (int*) malloc( (end - start + 1) *sizeof(int));
 	// total is 5 
-	if(fight(array[first_end],array[second_start],c,e,p)){
+/*	if(fight(array[first_end],array[second_start],c,e,p))
 		return;
-	}
+	
 	else if(fight(array[second_end],array[first_start],c,e,p)){
 		int j = 0;
 		for(int i = second_start; i <= second_end; i ++,j++)
@@ -57,8 +57,8 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 		j --;
 		for(int i = end; i >= start; i --,j --)
 			array[i] = tmp[j];
-	}
-	else{
+	}*/
+//	else{
 		int first_i = first_start;
 		int second_i = second_start;
 		int j = 0;
@@ -87,7 +87,7 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 		j --;
 		for(int i = end; i >= start; i --,j --)
 			array[i] = tmp[j];
-	}
+//	}
 	free(tmp);
 }
 
