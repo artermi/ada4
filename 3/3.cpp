@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 bool fight(const int i,const int j,const int c,const long long e,const int p){
 	long long answer = 1;
@@ -42,7 +43,7 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 	sort_internal(array,second_start,second_end,c,e,p);
 	sort_internal(array,first_start,first_end,c,e,p);
 	//4 5 3~4
-	int tmp[end - start + 1];
+	int *tmp = (int*) malloc( (end - start + 1) *sizeof(int));
 	// total is 5 
 	if(fight(array[first_end],array[second_start],c,e,p)){
 		return;
