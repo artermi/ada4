@@ -54,8 +54,7 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 			tmp[j] = array[i];
 		for(int i = first_start; i <= first_end;i ++, j ++)
 			tmp[j] = array[i];
-		j --;
-		for(int i = end; i >= start; i --,j --)
+		for(int i = start, j = 0; i < end; i ++,j ++)
 			array[i] = tmp[j];
 //		free(tmp);
 	}
@@ -86,8 +85,7 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 				tmp[j] = array[second_i]; second_i++; j ++;
 			}
 		}
-		j --;
-		for(int i = end; i >= start; i --,j --)
+		for(int i = start,j = 0; i <= end; i ++,j ++)
 			array[i] = tmp[j];
 //		free(tmp);
 	}
