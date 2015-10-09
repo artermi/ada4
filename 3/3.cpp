@@ -99,7 +99,7 @@ int main (){
 		long long e;
 		scanf("%d%d%lld%d",&n,&c,&e,&p);
 //		printf("%d %d %llu %llu\n",n,c,e,p);
-		int array[n];
+		int * array = (int *) malloc(n * sizeof(int));
 		for(int i = 0; i < n; i++)
 			array[i] = i + 1;
 		sort(array,n,c,e,p);
