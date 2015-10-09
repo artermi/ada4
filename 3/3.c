@@ -1,12 +1,9 @@
-#include <iostream>
-#include <cstdio>
-#include <cmath>
+#include <stdio.h>
 #define win 1
 #define lose 2
-using namespace std;
 
 int fight(const int i,const int j,const int c,const long long e,const int p){
-	long long int answer = 1;
+	long long answer = 1;
 	long long ground = i + j;
 	long long power = e;
 	while(power > 0){
@@ -14,15 +11,14 @@ int fight(const int i,const int j,const int c,const long long e,const int p){
 			answer *= ground;
 			answer %= p;
 		}
-		ground *= ground;
-		ground %= p;
+		ground = (ground * ground) % p;
 		power /= 2;
 	}
 
-	long long int ans = ((c % p) * ( (i - j) % p) * answer) % p;
-	if(ans < 0)
-		ans += p;
-	return ans  > (p / 2) ? 1 : 0;
+	answer = ((c % p) * ( (i - j) % p) * answer) % p;
+	if(answer < 0)
+		answer += p;
+	return answer  > (p / 2) ? 1 : 0;
 }
 
 void sort_internal(int *array,const int start,const int end,const int c,const long long e,const int p);
