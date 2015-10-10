@@ -1,37 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-bool fight(const int i,const int j,const int c,const long long e,const int p){
-	long long answer = 1;
-	long long ground = i + j;
+int build_power(int num, long long e,int p){
 	long long power = e;
+	long long ans = 1;
+	long long number = num % p;
+	while(power > 0){
+		if(power & 1)
+			ans = (ans * number) % p;
+		number = (number * number) % p;
+		power >>=1;
+	}
+	return (int)ans % p;
+}
+
+
+bool fight(const int i,const int j,const int c,const long long e,const int p,int *table){
+	long long answer = table[i + j];
+//	printf("table [i + j] = %d,build_power(i + j)=%d\n",table[i+j],build_power(i+j,e,p));
 	long long cp = c,pp = p,min = i - j;
-//	if(ground != pp)
-		while(power > 0){
-			if(power & 1){
-				answer *= ground;
-				answer %= pp;
-			}
-			ground = (ground * ground) % pp;
-			power >>= 1;
-		}
-	
 	answer = ( (((cp % pp) * (min % pp)) % pp) * answer) % pp;
 	if(answer < 0)
 		answer += pp;
 	return answer  > (pp / 2);
 }
 
-void sort_internal(int *array,const int start,const int end,const int c,const long long e,const int p);
-void sort(int *array, const int n,const int c,const long long e,const int p){
+void sort_internal(int *array,const int start,const int end,const int c,const long long e,const int p,int* table);
+void sort(int *array, const int n,const int c,const long long e,const int p,int* table){
 	// assume array is 1,2,3,4,5 0~4
-	sort_internal(array,0,n - 1,c,e,p);
+	sort_internal(array,0,n - 1,c,e,p,table);
 }
-void sort_internal(int *array,const int start,const int end,const int c,const long long e,const int p){
+void sort_internal(int *array,const int start,const int end,const int c,const long long e,const int p,int *table){
 	if(start == end)
 		return;
 	else if(start == end - 1){
-		if(fight(array[start],array[end],c,e,p))
+		if(fight(array[start],array[end],c,e,p,table))
 			return;
 		else{
 			int tmp = array[start];array[start] = array[end];array[end] =tmp;
@@ -40,13 +43,13 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 	}
 	int first_start = start,first_end = (start + end) / 2;
 	int second_start = first_end + 1, second_end = end;
-	sort_internal(array,second_start,second_end,c,e,p);
-	sort_internal(array,first_start,first_end,c,e,p);
+	sort_internal(array,second_start,second_end,c,e,p,table);
+	sort_internal(array,first_start,first_end,c,e,p,table);
 	//4 5 3~4
 	// total is 5 
-	if(fight(array[first_end],array[second_start],c,e,p))
+	if(fight(array[first_end],array[second_start],c,e,p,table))
 		return;	
-	else if(fight(array[second_end],array[first_start],c,e,p)){
+	else if(fight(array[second_end],array[first_start],c,e,p,table)){
 		int j = 0;
 		int *tmp = (int*) malloc( (end - start + 1) *sizeof(int));
 		for(int i = second_start; i <= second_end; i ++,j++)
@@ -77,7 +80,7 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 				}
 				break;
 			}
-			if(fight(array[first_i],array[second_i],c,e,p)){
+			if(fight(array[first_i],array[second_i],c,e,p,table)){
 				tmp[j] = array[first_i]; first_i ++; j++;
 			}
 			else{
@@ -99,9 +102,12 @@ int main (){
 		long long e;
 		scanf("%d%d%lld%d",&n,&c,&e,&p);
 		int *array = (int *) malloc(n * sizeof(int));
+		int *table = (int *) malloc(2 * n * sizeof(int));
+		for(int i = 0; i < 2 * n; i++)
+			table[i] = build_power(i,e,p);
 		for(int i = 0; i < n; i++)
 			array[i] = i + 1;
-		sort(array,n,c,e,p);
+		sort(array,n,c,e,p,table);
 		for(int i = 0; i < n; i ++)
 			printf("%d ",array[i]);
 		printf("\n");
