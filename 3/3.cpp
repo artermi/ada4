@@ -106,14 +106,18 @@ int main (){
 		for(int i = 1; i < 2 * n; i++){
 			if(i % 2 == 0 && i != 2)
 				table[i] = (int)(((long long)table[2]  * (long long)table[i/2]) % p);
-/*			else if(i % 3 == 0 && i != 3) 
-				table[i] = (table[3]  * table[i/3] ) % p;
-			else if(i % 5 == 0 && i != 5) 
-				table[i] = (table[5]  * (table[i/5] ) % p;
-			else if(i % 7 == 0 && i != 7) 
-				table[i] = (table[7]  * table[i/7] ) % p;
-			else if(i % 13 == 0 && i != 13) 
-				table[i] = (table[13]  * table[i/13] ) % p;*/
+			else if(i % 3 == 0 && i != 3)
+				table[i] = (int)(((long long)table[3]  * (long long)table[i/3]) % p);
+			else if(i % 5 == 0 && i != 5)
+				table[i] = (int)(((long long)table[5]  * (long long)table[i/5]) % p);
+			else if(i % 7 == 0 && i != 7)
+				table[i] = (int)(((long long)table[7]  * (long long)table[i/7]) % p);
+			else if(i % 11 == 0 && i != 11)
+				table[i] = (int)(((long long)table[11]  * (long long)table[i/11]) % p);
+			else if(i % 13 == 0 && i != 13)
+				table[i] = (int)(((long long)table[13]  * (long long)table[i/13]) % p);
+			else if(i % 17 == 0 && i != 17)
+				table[i] = (int)(((long long)table[17]  * (long long)table[i/17]) % p);
 			else
 				table[i] = build_power(i,e,p);
 		}
