@@ -15,8 +15,8 @@ bool fight(const int i,const int j,const int c,const long long e,const int p){
 			ground = (ground * ground) % pp;
 			power >>= 1;
 		}
-
-	answer = ( (cp % pp) * (min % pp) * answer) % pp;
+	
+	answer = ( (((cp % pp) * (min % pp)) % pp) * answer) % pp;
 	if(answer < 0)
 		answer += pp;
 	return answer  > (pp / 2);
@@ -40,7 +40,6 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 	}
 	int first_start = start,first_end = (start + end) / 2;
 	int second_start = first_end + 1, second_end = end;
-//	printf("%d %d %d %d\n",first_start,first_end,second_start,second_end);
 	sort_internal(array,second_start,second_end,c,e,p);
 	sort_internal(array,first_start,first_end,c,e,p);
 	//4 5 3~4
@@ -57,7 +56,6 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 		j --;
 		for(int i = end; i >= start; i --,j --)
 			array[i] = tmp[j];
-//		free(tmp);
 	}
 	else{
 		int *tmp = (int*) malloc( (end - start + 1) *sizeof(int));
@@ -89,7 +87,6 @@ void sort_internal(int *array,const int start,const int end,const int c,const lo
 		j --;
 		for(int i = end; i >= start; i --,j --)
 			array[i] = tmp[j];
-//		free(tmp);
 	}
 }
 
@@ -101,7 +98,6 @@ int main (){
 		int c,n,p;
 		long long e;
 		scanf("%d%d%lld%d",&n,&c,&e,&p);
-//		printf("%d %d %llu %llu\n",n,c,e,p);
 		int *array = (int *) malloc(n * sizeof(int));
 		for(int i = 0; i < n; i++)
 			array[i] = i + 1;
@@ -109,7 +105,6 @@ int main (){
 		for(int i = 0; i < n; i ++)
 			printf("%d ",array[i]);
 		printf("\n");
-//		free(array);
 	}
 	return 0;
 }
