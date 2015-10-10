@@ -103,8 +103,20 @@ int main (){
 		scanf("%d%d%lld%d",&n,&c,&e,&p);
 		int *array = (int *) malloc(n * sizeof(int));
 		int *table = (int *) malloc(2 * n * sizeof(int));
-		for(int i = 0; i < 2 * n; i++)
-			table[i] = build_power(i,e,p);
+		for(int i = 1; i < 2 * n; i++){
+			if(i % 2 == 0 && i != 2)
+				table[i] = ((table[2] % p) * (table[i/2] % p)) % p;
+			else if(i % 3 == 0 && i != 3) 
+				table[i] = ((table[3] % p) * (table[i/3] % p)) % p;
+			else if(i % 5 == 0 && i != 5) 
+				table[i] = ((table[5] % p) * (table[i/5] % p)) % p;
+			else if(i % 7 == 0 && i != 7) 
+				table[i] = ((table[7] % p) * (table[i/7] % p)) % p;
+			else if(i % 13 == 0 && i != 13) 
+				table[i] = ((table[13] % p) * (table[i/13] % p)) % p;
+			else
+				table[i] = build_power(i,e,p);
+		}
 		for(int i = 0; i < n; i++)
 			array[i] = i + 1;
 		sort(array,n,c,e,p,table);
