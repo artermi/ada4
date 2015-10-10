@@ -114,7 +114,7 @@ int main (){
 				table[i] = ((table[7] % p) * (table[i/7] % p)) % p;
 			else if(i % 13 == 0 && i != 13) 
 				table[i] = ((table[13] % p) * (table[i/13] % p)) % p;*/
-			else
+//			else
 				table[i] = build_power(i,e,p);
 		}
 		for(int i = 0; i < n; i++)
