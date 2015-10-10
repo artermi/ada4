@@ -104,9 +104,9 @@ int main (){
 		int *array = (int *) malloc(n * sizeof(int));
 		int *table = (int *) malloc(2 * n * sizeof(int));
 		for(int i = 1; i < 2 * n; i++){
-			if(i % 2 == 0 && i != 2)
+/*			if(i % 2 == 0 && i != 2)
 				table[i] = ((table[2] % p) * (table[i/2] % p)) % p;
-/*			else if(i % 3 == 0 && i != 3) 
+			else if(i % 3 == 0 && i != 3) 
 				table[i] = ((table[3] % p) * (table[i/3] % p)) % p;
 			else if(i % 5 == 0 && i != 5) 
 				table[i] = ((table[5] % p) * (table[i/5] % p)) % p;
