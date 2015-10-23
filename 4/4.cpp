@@ -124,7 +124,7 @@ int main (){
 	while(test_case --){
 		cin >> lower_bound >> upper_bound;
 		build_table(digit_table,upper_bound,build_to_where);
-//		print_table(digit_table,build_to_where);
+		print_table(digit_table,build_to_where);
 		cout << caculate_number(digit_table,lower_bound,upper_bound) << endl;
 	}
 	return 0;
