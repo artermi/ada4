@@ -89,7 +89,7 @@ lli number_smaller_than(lli digit_table[][7][19][19],lli number, bool cover){
 		for(lli head_num = head_number_base; head_num < head_number_head; head_num ++){
 //			cout << head_num<<' '<< i << ' ';
 			lli head_num_full = head_num * (lli)pow(10,i);
-			lucky_num += how_many_need(digit_table,i,(int)head_num_full % 7,number_num(head_num_full,7),number_num(head_num_full,4));
+			lucky_num += how_many_need(digit_table,i,(int)head_num_full % 7,number_num(head_num,7),number_num(head_num,4));
 //			cout << lucky_num <<endl;
 		}
 	}
