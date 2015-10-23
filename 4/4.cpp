@@ -84,7 +84,7 @@ void print_table(lli digit_table[][7][18][18],int where){
 		for(int j = 0; j < 7; j ++){
 			cout << "remain is: " << j<<endl;
 			for(int k = 0; k <= i + 1; k ++){
-				for(int l = 0; l + k <= i; l++)
+				for(int l = 0; l + k <= i + 1; l++)
 					cout << digit_table[i][j][k][l] << " ";
 			cout << endl;
 			}
