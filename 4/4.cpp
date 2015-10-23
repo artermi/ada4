@@ -60,8 +60,8 @@ lli how_many_need(lli digit_table[][7][18][18], int digit, int number){
 	 *	7    x
 	 */
 	lli lucky_num = 0;
-	for(int i = 3; i <= digit; i++)
-		for(int j = 0; j + i <= digit && j < i; j ++)
+	for(int i = 3; i <= digit + 1; i++)
+		for(int j = 0; j + i <= digit + 1 && j < i; j ++)
 			lucky_num += digit_table[digit][number][i][j];
 	return lucky_num;
 }
