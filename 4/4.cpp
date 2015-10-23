@@ -50,6 +50,10 @@ void build_table(int ****digit_table,const lli &bound,int & now_where){
 		now_where ++;
 	}
 }
+int caculate_number(int ****digit_tablem,lli lower,lli upper){
+	return 0;
+}
+
 
 int main (){
 	int test_case;
@@ -58,12 +62,11 @@ int main (){
 	int build_to_where = 0;
 	initialize(digit_table);
 	
-	
 	cin >> test_case;
 	while(test_case --){
 		cin >> lower_bound >> upper_bound;
 		build_table(digit_table,upper_bound,build_to_where);
-		cout << 
+		cout << caculate_number(digit_table,lower_bound,upper_bound) << endl;
 	}
 	return 0;
 }
