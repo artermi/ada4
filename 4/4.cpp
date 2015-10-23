@@ -6,7 +6,7 @@
 #define lli long long int
 using namespace std;
 
-void initialize(int ****digit_table[][7][18][18]){
+void initialize(int digit_table[][7][18][18]){
 	digit_table[0][0][1][0] = 1; //7
 	digit_table[0][1][0][0] = 2; //1 8
 	digit_table[0][2][0][0] = 2; //2 9
@@ -15,7 +15,7 @@ void initialize(int ****digit_table[][7][18][18]){
 	digit_table[0][5][0][0] = 1; //5
 	digit_table[0][6][0][0] = 1; //6
 }
-void project_table(int ****digit_table[][7][18][18],int digit_num,int remain,int add){
+void project_table(int digit_table[][7][18][18],int digit_num,int remain,int add){
 	if(add == 4){
 	for(int i = 0; i <= digit_num; i++)
 			for(int j = 0; j + i <= digit_num; j++)
@@ -33,15 +33,15 @@ void project_table(int ****digit_table[][7][18][18],int digit_num,int remain,int
 	}
 }
 
-void build_next(int ****digit_table[][7][18][18],int digit_num){
+void build_next(int digit_table[][7][18][18],int digit_num){
 	for(int i = 0; i < 7; i ++){
 		for(int j = 0; j < 10; j++){
-			project_table(****digit_table,digit_num,i,j);
+			project_table(digit_table,digit_num,i,j);
 		}
 	}
 }
 
-void build_table(int ****digit_table[][7][18][18],const lli &bound,int & now_where){
+void build_table(int digit_table[][7][18][18],const lli &bound,int & now_where){
 	int to_where = (int) log10(lli);
 	if(to_where <= now_where)
 		return;
@@ -50,7 +50,7 @@ void build_table(int ****digit_table[][7][18][18],const lli &bound,int & now_whe
 		now_where ++;
 	}
 }
-int caculate_number(int ****digit_tablem[][7][18][18],lli lower,lli upper){
+int caculate_number(int digit_tablem[][7][18][18],lli lower,lli upper){
 	return 0;
 }
 
