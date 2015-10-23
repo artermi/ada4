@@ -41,8 +41,6 @@ void build_next(lli digit_table[][7][18][18],int digit_num){
 
 void build_table(lli digit_table[][7][18][18],const lli &bound,int & now_where){
 	int to_where = (int) log10(bound);
-	if(to_where <= now_where)
-		return;
 	while(now_where < to_where){
 		build_next(digit_table,now_where);
 		now_where ++;
@@ -80,6 +78,20 @@ lli caculate_number(lli digit_table[][7][18][18],lli lower,lli upper){
 	return number_smaller_than(digit_table,upper,1) - number_smaller_than(digit_table,lower,0);
 }
 
+void print_table(lli digit_table[][7][18][18],int where){
+	for(int i = 0; i <= where; i++){
+		cout << "how many number: "<< i + 1<<endl; 
+		for(int j = 0; j < 7; j ++){
+			cout << "remain is: " << j<<endl;
+			for(int k = 0; k <= i + 1; k ++){
+				for(int l = 0; l + k <= i; l++)
+					cout << digit_table[i][j][k][l] << " ";
+			cout << endl;
+			}
+		}
+	}
+}
+
 
 int main (){
 	int test_case;
@@ -87,12 +99,12 @@ int main (){
 	lli digit_table[18][7][18][18] = {0}; //10^n , %7 == ?, seven_num, four_num
 	int build_to_where = 0;
 	initialize(digit_table);
-	cout << digit_table[0][6][0][0] << endl;
 	
 	cin >> test_case;
 	while(test_case --){
 		cin >> lower_bound >> upper_bound;
 		build_table(digit_table,upper_bound,build_to_where);
+		print_table(digit_table,build_to_where);
 		cout << caculate_number(digit_table,lower_bound,upper_bound) << endl;
 	}
 	return 0;
