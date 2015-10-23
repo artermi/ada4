@@ -5,7 +5,7 @@ typedef long long int lli;
 using namespace std;
 
 void initialize(lli digit_table[][7][19][19]){
-	digit_table[0][0][1][0] = 1; //7
+	digit_table[0][0][1][0] = 2; //7 0
 	digit_table[0][1][0][0] = 2; //1 8
 	digit_table[0][2][0][0] = 2; //2 9
 	digit_table[0][3][0][0] = 1; //3
@@ -47,7 +47,7 @@ void build_table(lli digit_table[][7][19][19],const lli &bound,int & now_where){
 	}
 }
 
-lli how_many_need(lli digit_table[][7][19][19], int digit, int number){
+lli how_many_need(lli digit_table[][7][19][19], int digit, int number,int seven_num,int four_num){
 	/*	digit = 7, now is 10^6 ~ 10^7 -1
 	 *	4\7  0 1 2 3 4 5 6 7
 	 *	0    x x x o o o o o
@@ -60,22 +60,42 @@ lli how_many_need(lli digit_table[][7][19][19], int digit, int number){
 	 *	7    x
 	 */
 	lli lucky_num = 0;
-	for(int i = 3; i <= digit + 1; i++)
-		for(int j = 0; j + i <= digit + 1 && j < i; j ++)
+	int k = (seven_num > 3) ? 0: ( 3 - seven_num);
+	for(int i = k; i <= digit + 1; i++)
+		for(int j = 0; j + i <= digit + 1 && j + four_num < i + seven_num; j ++)
 			lucky_num += digit_table[digit][number][i][j];
 	return lucky_num;
 }
 
+int number_num(lli number,int want){
+	int total = 0;
+	while(number > 0){
+		if(number % 10 == want) total ++;
+		number /= 10;
+	}
+	return total;
+}
+
 lli number_smaller_than(lli digit_table[][7][19][19],lli number, bool cover){
 	lli lucky_num = 0;
-	for(int i = 1; i < (int)log10(number); i++){
-		lucky_num += how_many_need(digit_table,i,0); 
+		lucky_num += how_many_need(digit_table,(int)log10(number) - 1,0,0,0); 
+/*
+	int seven_num = 0,four_num = 0; 
+	for(int i = (int)log10(number); i >= 0; i--){
+		lli head_number_base = (number / pow(10,i + 1)) * 10;
+		lli head_number_head = number / pow(10,i);
+		for(lli head_num = head_number_base; head_number < head_number_head; head_num ++)
+			if(head_num == 0) continue;
+			lli head_num_full = head_num * (lli)pow(10,i);
+			lucky_num += how_many_need(digit_table,i,(int)head_num_full % 7,number_num(head_num_full,7),number_num(head_num_full,4));
 	}
+	*/
 	return lucky_num;
+	
 }
 
 lli caculate_number(lli digit_table[][7][19][19],lli lower,lli upper){
-	return number_smaller_than(digit_table,upper,1) - number_smaller_than(digit_table,lower,0);
+	return number_smaller_than(digit_table,upper,true) - number_smaller_than(digit_table,lower,false);
 }
 
 void print_table(lli digit_table[][7][19][19],int where){
