@@ -65,7 +65,7 @@ lli how_many_need(lli digit_table[][7][19][19], int digit, int number,int seven_
 		for(int i = k; i <= l + 1; i++)
 			for(int j = 0; j + i <= l + 1 && j + four_num < i + seven_num; j ++)
 				lucky_num += digit_table[l][number][i][j];
-	if(digit == 0 && number == 0 && seven_num >= 3 && seven_num >= four_num)
+	if(number == 0 && seven_num >= 3 && seven_num > four_num)
 		lucky_num ++;
 	return lucky_num;
 }
@@ -85,14 +85,16 @@ lli number_smaller_than(lli digit_table[][7][19][19],lli number, bool cover){
 		lli head_number_base = (number / pow(10,i + 1));
 		head_number_base *= 10;
 		lli head_number_head = number / pow(10,i);
+
 //		cout << head_number_base <<' '<<head_number_head <<endl;
 		for(lli head_num = head_number_base; head_num < head_number_head; head_num ++){
 //			cout << head_num<<' '<< i << ' ';
 			lli head_num_full = head_num * (lli)pow(10,i);
-			lucky_num += how_many_need(digit_table,i,(int)head_num_full % 7,number_num(head_num,7),number_num(head_num,4));
+			lucky_num += how_many_need(digit_table,i,(7 - (int)head_num_full % 7) % 7,number_num(head_num,7),number_num(head_num,4));
 //			cout << lucky_num <<endl;
 		}
 	}
+//	cout << lucky_num << endl;
 	if(cover && number % 7 == 0 && number_num(number, 7) > number_num(number,4) && number_num(number,7) > 2)
 		lucky_num ++;
 	return lucky_num;
