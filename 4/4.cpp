@@ -96,7 +96,7 @@ void print_table(lli digit_table[][7][18][18],int where){
 int main (){
 	int test_case;
 	lli lower_bound,upper_bound;
-	lli digit_table[18][7][18][18] = {0}; //10^n , %7 == ?, seven_num, four_num
+	lli digit_table[19][7][19][19] = {0}; //10^n , %7 == ?, seven_num, four_num
 	int build_to_where = 0;
 	initialize(digit_table);
 	
