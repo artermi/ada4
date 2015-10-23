@@ -3,7 +3,7 @@
 #include <array>
 #include <cmath>
 
-#define lli long long int
+typedef long long int lli;
 using namespace std;
 
 void initialize(int digit_table[][7][18][18]){
@@ -42,7 +42,7 @@ void build_next(int digit_table[][7][18][18],int digit_num){
 }
 
 void build_table(int digit_table[][7][18][18],const lli &bound,int & now_where){
-	int to_where = (int) log10(lli);
+	int to_where = (int) log10(bound);
 	if(to_where <= now_where)
 		return;
 	while(now_where < to_where){
