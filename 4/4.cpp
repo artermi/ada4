@@ -5,7 +5,7 @@ typedef long long int lli;
 using namespace std;
 
 void initialize(lli digit_table[][7][19][19]){
-	digit_table[0][0][1][0] = 2; //7 0
+	digit_table[0][0][1][0] = 1; //7
 	digit_table[0][1][0][0] = 2; //1 8
 	digit_table[0][2][0][0] = 2; //2 9
 	digit_table[0][3][0][0] = 1; //3
@@ -95,7 +95,7 @@ lli number_smaller_than(lli digit_table[][7][19][19],lli number, bool cover){
 }
 
 lli caculate_number(lli digit_table[][7][19][19],lli lower,lli upper){
-	return number_smaller_than(digit_table,upper,true) - number_smaller_than(digit_table,lower,false);
+	return (number_smaller_than(digit_table,upper,true) - 1) - number_smaller_than(digit_table,lower,false);
 }
 
 void print_table(lli digit_table[][7][19][19],int where){
@@ -124,7 +124,7 @@ int main (){
 	while(test_case --){
 		cin >> lower_bound >> upper_bound;
 		build_table(digit_table,upper_bound,build_to_where);
-		print_table(digit_table,build_to_where);
+//		print_table(digit_table,build_to_where);
 		cout << caculate_number(digit_table,lower_bound,upper_bound) << endl;
 	}
 	return 0;
