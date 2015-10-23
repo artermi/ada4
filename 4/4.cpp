@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <array>
 #include <cmath>
 
 typedef long long int lli;
