@@ -78,8 +78,9 @@ int number_num(lli number,int want){
 
 lli number_smaller_than(lli digit_table[][7][19][19],lli number, bool cover){
 	lli lucky_num = 0;
-		lucky_num += how_many_need(digit_table,(int)log10(number) - 1,0,0,0); 
-/*
+	for(int i = 1; i < (int)log10(number); i++){
+		lucky_num += how_many_need(digit_table,i,0,0,0); 
+	}
 	int seven_num = 0,four_num = 0; 
 	for(int i = (int)log10(number); i >= 0; i--){
 		lli head_number_base = (number / pow(10,i + 1)) * 10;
@@ -89,13 +90,11 @@ lli number_smaller_than(lli digit_table[][7][19][19],lli number, bool cover){
 			lli head_num_full = head_num * (lli)pow(10,i);
 			lucky_num += how_many_need(digit_table,i,(int)head_num_full % 7,number_num(head_num_full,7),number_num(head_num_full,4));
 	}
-	*/
 	return lucky_num;
-	
 }
 
 lli caculate_number(lli digit_table[][7][19][19],lli lower,lli upper){
-	return (number_smaller_than(digit_table,upper,true) - 1) - number_smaller_than(digit_table,lower,false);
+	return number_smaller_than(digit_table,upper,true) - number_smaller_than(digit_table,lower,false);
 }
 
 void print_table(lli digit_table[][7][19][19],int where){
