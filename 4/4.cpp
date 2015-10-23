@@ -87,6 +87,7 @@ int main (){
 	lli digit_table[18][7][18][18] = {0}; //10^n , %7 == ?, seven_num, four_num
 	int build_to_where = 0;
 	initialize(digit_table);
+	cout << digit_table[0][6][0][0] << endl;
 	
 	cin >> test_case;
 	while(test_case --){
