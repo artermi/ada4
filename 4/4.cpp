@@ -15,17 +15,17 @@ void initialize(lli digit_table[][7][18][18]){
 }
 void project_table(lli digit_table[][7][18][18],int digit_num,int remain,int add){
 	if(add == 4){
-	for(int i = 0; i <= digit_num; i++)
+	for(int i = 0; i <= digit_num + 1; i++)
 			for(int j = 0; j + i <= digit_num; j++)
 				digit_table[digit_num + 1][(remain * 10 + add) % 7][i][j + 1] += digit_table[digit_num][remain][i][j];
 	}
 	else if(add == 7){
-		for(int i = 0; i <= digit_num; i++)
+		for(int i = 0; i <= digit_num + 1; i++)
 			for(int j = 0; j + i <= digit_num; j++)
 				digit_table[digit_num + 1][(remain * 10 + add) % 7][i + 1][j] += digit_table[digit_num][remain][i][j];
 	}
 	else{
-		for(int i = 0; i <= digit_num; i++)
+		for(int i = 0; i <= digit_num + 1; i++)
 			for(int j = 0; j + i <= digit_num; j++)
 				digit_table[digit_num + 1][(remain * 10 + add) % 7][i][j] += digit_table[digit_num][remain][i][j];
 	}
@@ -42,7 +42,7 @@ void build_next(lli digit_table[][7][18][18],int digit_num){
 void build_table(lli digit_table[][7][18][18],const lli &bound,int & now_where){
 	int to_where = (int) log10(bound);
 	while(now_where < to_where){
-		build_next(digit_table,now_where + 1);
+		build_next(digit_table,now_where);
 		now_where ++;
 	}
 }
