@@ -4,7 +4,7 @@
 typedef long long int lli;
 using namespace std;
 
-void initialize(lli digit_table[][7][18][18]){
+void initialize(lli digit_table[][7][19][19]){
 	digit_table[0][0][1][0] = 1; //7
 	digit_table[0][1][0][0] = 2; //1 8
 	digit_table[0][2][0][0] = 2; //2 9
@@ -13,7 +13,7 @@ void initialize(lli digit_table[][7][18][18]){
 	digit_table[0][5][0][0] = 1; //5
 	digit_table[0][6][0][0] = 1; //6
 }
-void project_table(lli digit_table[][7][18][18],int digit_num,int remain,int add){
+void project_table(lli digit_table[][7][19][19],int digit_num,int remain,int add){
 	if(add == 4){
 	for(int i = 0; i <= digit_num + 1; i++)
 			for(int j = 0; j + i <= digit_num + 1; j++)
@@ -31,7 +31,7 @@ void project_table(lli digit_table[][7][18][18],int digit_num,int remain,int add
 	}
 }
 
-void build_next(lli digit_table[][7][18][18],int digit_num){
+void build_next(lli digit_table[][7][19][19],int digit_num){
 	for(int i = 0; i < 7; i ++){
 		for(int j = 0; j < 10; j++){
 			project_table(digit_table,digit_num,i,j);
@@ -39,7 +39,7 @@ void build_next(lli digit_table[][7][18][18],int digit_num){
 	}
 }
 
-void build_table(lli digit_table[][7][18][18],const lli &bound,int & now_where){
+void build_table(lli digit_table[][7][19][19],const lli &bound,int & now_where){
 	int to_where = (int) log10(bound);
 	while(now_where < to_where){
 		build_next(digit_table,now_where);
@@ -47,7 +47,7 @@ void build_table(lli digit_table[][7][18][18],const lli &bound,int & now_where){
 	}
 }
 
-lli how_many_need(lli digit_table[][7][18][18], int digit, int number){
+lli how_many_need(lli digit_table[][7][19][19], int digit, int number){
 	/*	digit = 7, now is 10^6 ~ 10^7 -1
 	 *	4\7  0 1 2 3 4 5 6 7
 	 *	0    x x x o o o o o
@@ -66,7 +66,7 @@ lli how_many_need(lli digit_table[][7][18][18], int digit, int number){
 	return lucky_num;
 }
 
-lli number_smaller_than(lli digit_table[][7][18][18],lli number, bool cover){
+lli number_smaller_than(lli digit_table[][7][19][19],lli number, bool cover){
 	lli lucky_num = 0;
 	for(int i = 1; i < (int)log10(number); i++){
 		lucky_num += how_many_need(digit_table,i,0); 
@@ -74,11 +74,11 @@ lli number_smaller_than(lli digit_table[][7][18][18],lli number, bool cover){
 	return lucky_num;
 }
 
-lli caculate_number(lli digit_table[][7][18][18],lli lower,lli upper){
+lli caculate_number(lli digit_table[][7][19][19],lli lower,lli upper){
 	return number_smaller_than(digit_table,upper,1) - number_smaller_than(digit_table,lower,0);
 }
 
-void print_table(lli digit_table[][7][18][18],int where){
+void print_table(lli digit_table[][7][19][19],int where){
 	for(int i = 0; i <= where; i++){
 		cout << "how many number: "<< i + 1<<endl; 
 		for(int j = 0; j < 7; j ++){
