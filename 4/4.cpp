@@ -42,7 +42,7 @@ void build_next(lli digit_table[][7][18][18],int digit_num){
 void build_table(lli digit_table[][7][18][18],const lli &bound,int & now_where){
 	int to_where = (int) log10(bound);
 	while(now_where < to_where){
-		build_next(digit_table,now_where);
+		build_next(digit_table,now_where + 1);
 		now_where ++;
 	}
 }
